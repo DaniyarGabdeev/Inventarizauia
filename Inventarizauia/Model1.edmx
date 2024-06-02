@@ -1,0 +1,631 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Inventarizauia3Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MestoYstanovki">
+          <Key>
+            <PropertyRef Name="mestoYstanovkiId" />
+          </Key>
+          <Property Name="mestoYstanovkiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" />
+          <Property Name="opisania" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Oborudovanie">
+          <Key>
+            <PropertyRef Name="oborudovanieId" />
+          </Key>
+          <Property Name="oborudovanieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" />
+          <Property Name="dataPokypki" Type="date" />
+          <Property Name="sotrudnikiId" Type="int" />
+          <Property Name="proizvoditelId" Type="int" />
+          <Property Name="tipEquipmentId" Type="int" />
+          <Property Name="mestoYstanovkiId" Type="int" />
+          <Property Name="statusOborudovaniaId" Type="int" />
+        </EntityType>
+        <EntityType Name="Proizvoditel">
+          <Key>
+            <PropertyRef Name="proizvoditelId" />
+          </Key>
+          <Property Name="proizvoditelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" />
+          <Property Name="telefon" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Sotrudniki">
+          <Key>
+            <PropertyRef Name="sotrudnikiId" />
+          </Key>
+          <Property Name="sotrudnikiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fio" Type="varchar" MaxLength="100" />
+          <Property Name="post" Type="varchar" MaxLength="100" />
+          <Property Name="telefon" Type="varchar" MaxLength="11" />
+          <Property Name="role" Type="varchar" MaxLength="100" />
+          <Property Name="login" Type="varchar" MaxLength="100" />
+          <Property Name="parol" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="StatusOborudovania">
+          <Key>
+            <PropertyRef Name="statusOborudovaniaId" />
+          </Key>
+          <Property Name="statusOborudovaniaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="StatusZauvka">
+          <Key>
+            <PropertyRef Name="statusZauvkaId" />
+          </Key>
+          <Property Name="statusZauvkaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipEquipment">
+          <Key>
+            <PropertyRef Name="tipEquipmentId" />
+          </Key>
+          <Property Name="tipEquipmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" />
+          <Property Name="opisania" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Zauvka">
+          <Key>
+            <PropertyRef Name="zauvkaId" />
+          </Key>
+          <Property Name="zauvkaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sotrudnikiId" Type="int" />
+          <Property Name="oborudovanieId" Type="int" />
+          <Property Name="mestoYstanovkiId" Type="int" />
+          <Property Name="data" Type="date" />
+          <Property Name="statusZauvkaId" Type="int" />
+        </EntityType>
+        <Association Name="FK__Oborudova__mesto__49C3F6B7">
+          <End Role="MestoYstanovki" Type="Self.MestoYstanovki" Multiplicity="0..1" />
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MestoYstanovki">
+              <PropertyRef Name="mestoYstanovkiId" />
+            </Principal>
+            <Dependent Role="Oborudovanie">
+              <PropertyRef Name="mestoYstanovkiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oborudova__proiz__47DBAE45">
+          <End Role="Proizvoditel" Type="Self.Proizvoditel" Multiplicity="0..1" />
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvoditel">
+              <PropertyRef Name="proizvoditelId" />
+            </Principal>
+            <Dependent Role="Oborudovanie">
+              <PropertyRef Name="proizvoditelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oborudova__sotru__46E78A0C">
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="0..1" />
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudniki">
+              <PropertyRef Name="sotrudnikiId" />
+            </Principal>
+            <Dependent Role="Oborudovanie">
+              <PropertyRef Name="sotrudnikiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oborudova__statu__4AB81AF0">
+          <End Role="StatusOborudovania" Type="Self.StatusOborudovania" Multiplicity="0..1" />
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOborudovania">
+              <PropertyRef Name="statusOborudovaniaId" />
+            </Principal>
+            <Dependent Role="Oborudovanie">
+              <PropertyRef Name="statusOborudovaniaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oborudova__tipEq__48CFD27E">
+          <End Role="TipEquipment" Type="Self.TipEquipment" Multiplicity="0..1" />
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipEquipment">
+              <PropertyRef Name="tipEquipmentId" />
+            </Principal>
+            <Dependent Role="Oborudovanie">
+              <PropertyRef Name="tipEquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zauvka__mestoYst__4F7CD00D">
+          <End Role="MestoYstanovki" Type="Self.MestoYstanovki" Multiplicity="0..1" />
+          <End Role="Zauvka" Type="Self.Zauvka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MestoYstanovki">
+              <PropertyRef Name="mestoYstanovkiId" />
+            </Principal>
+            <Dependent Role="Zauvka">
+              <PropertyRef Name="mestoYstanovkiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zauvka__oborudov__4E88ABD4">
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="0..1" />
+          <End Role="Zauvka" Type="Self.Zauvka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oborudovanie">
+              <PropertyRef Name="oborudovanieId" />
+            </Principal>
+            <Dependent Role="Zauvka">
+              <PropertyRef Name="oborudovanieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zauvka__sotrudni__4D94879B">
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="0..1" />
+          <End Role="Zauvka" Type="Self.Zauvka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudniki">
+              <PropertyRef Name="sotrudnikiId" />
+            </Principal>
+            <Dependent Role="Zauvka">
+              <PropertyRef Name="sotrudnikiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zauvka__statusZa__5070F446">
+          <End Role="StatusZauvka" Type="Self.StatusZauvka" Multiplicity="0..1" />
+          <End Role="Zauvka" Type="Self.Zauvka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusZauvka">
+              <PropertyRef Name="statusZauvkaId" />
+            </Principal>
+            <Dependent Role="Zauvka">
+              <PropertyRef Name="statusZauvkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Inventarizauia3ModelContainer">
+          <EntitySet Name="MestoYstanovki" EntityType="Self.MestoYstanovki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Oborudovanie" EntityType="Self.Oborudovanie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proizvoditel" EntityType="Self.Proizvoditel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusOborudovania" EntityType="Self.StatusOborudovania" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusZauvka" EntityType="Self.StatusZauvka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipEquipment" EntityType="Self.TipEquipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zauvka" EntityType="Self.Zauvka" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Oborudova__mesto__49C3F6B7" Association="Self.FK__Oborudova__mesto__49C3F6B7">
+            <End Role="MestoYstanovki" EntitySet="MestoYstanovki" />
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oborudova__proiz__47DBAE45" Association="Self.FK__Oborudova__proiz__47DBAE45">
+            <End Role="Proizvoditel" EntitySet="Proizvoditel" />
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oborudova__sotru__46E78A0C" Association="Self.FK__Oborudova__sotru__46E78A0C">
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oborudova__statu__4AB81AF0" Association="Self.FK__Oborudova__statu__4AB81AF0">
+            <End Role="StatusOborudovania" EntitySet="StatusOborudovania" />
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oborudova__tipEq__48CFD27E" Association="Self.FK__Oborudova__tipEq__48CFD27E">
+            <End Role="TipEquipment" EntitySet="TipEquipment" />
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zauvka__mestoYst__4F7CD00D" Association="Self.FK__Zauvka__mestoYst__4F7CD00D">
+            <End Role="MestoYstanovki" EntitySet="MestoYstanovki" />
+            <End Role="Zauvka" EntitySet="Zauvka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zauvka__oborudov__4E88ABD4" Association="Self.FK__Zauvka__oborudov__4E88ABD4">
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+            <End Role="Zauvka" EntitySet="Zauvka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zauvka__sotrudni__4D94879B" Association="Self.FK__Zauvka__sotrudni__4D94879B">
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+            <End Role="Zauvka" EntitySet="Zauvka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zauvka__statusZa__5070F446" Association="Self.FK__Zauvka__statusZa__5070F446">
+            <End Role="StatusZauvka" EntitySet="StatusZauvka" />
+            <End Role="Zauvka" EntitySet="Zauvka" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Inventarizauia3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MestoYstanovki">
+          <Key>
+            <PropertyRef Name="mestoYstanovkiId" />
+          </Key>
+          <Property Name="mestoYstanovkiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="opisania" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Oborudovanie" Relationship="Self.FK__Oborudova__mesto__49C3F6B7" FromRole="MestoYstanovki" ToRole="Oborudovanie" />
+          <NavigationProperty Name="Zauvka" Relationship="Self.FK__Zauvka__mestoYst__4F7CD00D" FromRole="MestoYstanovki" ToRole="Zauvka" />
+        </EntityType>
+        <EntityType Name="Oborudovanie">
+          <Key>
+            <PropertyRef Name="oborudovanieId" />
+          </Key>
+          <Property Name="oborudovanieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dataPokypki" Type="DateTime" Precision="0" />
+          <Property Name="sotrudnikiId" Type="Int32" />
+          <Property Name="proizvoditelId" Type="Int32" />
+          <Property Name="tipEquipmentId" Type="Int32" />
+          <Property Name="mestoYstanovkiId" Type="Int32" />
+          <Property Name="statusOborudovaniaId" Type="Int32" />
+          <NavigationProperty Name="MestoYstanovki" Relationship="Self.FK__Oborudova__mesto__49C3F6B7" FromRole="Oborudovanie" ToRole="MestoYstanovki" />
+          <NavigationProperty Name="Proizvoditel" Relationship="Self.FK__Oborudova__proiz__47DBAE45" FromRole="Oborudovanie" ToRole="Proizvoditel" />
+          <NavigationProperty Name="Sotrudniki" Relationship="Self.FK__Oborudova__sotru__46E78A0C" FromRole="Oborudovanie" ToRole="Sotrudniki" />
+          <NavigationProperty Name="StatusOborudovania" Relationship="Self.FK__Oborudova__statu__4AB81AF0" FromRole="Oborudovanie" ToRole="StatusOborudovania" />
+          <NavigationProperty Name="TipEquipment" Relationship="Self.FK__Oborudova__tipEq__48CFD27E" FromRole="Oborudovanie" ToRole="TipEquipment" />
+          <NavigationProperty Name="Zauvka" Relationship="Self.FK__Zauvka__oborudov__4E88ABD4" FromRole="Oborudovanie" ToRole="Zauvka" />
+        </EntityType>
+        <EntityType Name="Proizvoditel">
+          <Key>
+            <PropertyRef Name="proizvoditelId" />
+          </Key>
+          <Property Name="proizvoditelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefon" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Oborudovanie" Relationship="Self.FK__Oborudova__proiz__47DBAE45" FromRole="Proizvoditel" ToRole="Oborudovanie" />
+        </EntityType>
+        <EntityType Name="Sotrudniki">
+          <Key>
+            <PropertyRef Name="sotrudnikiId" />
+          </Key>
+          <Property Name="sotrudnikiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="post" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefon" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="parol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Oborudovanie" Relationship="Self.FK__Oborudova__sotru__46E78A0C" FromRole="Sotrudniki" ToRole="Oborudovanie" />
+          <NavigationProperty Name="Zauvka" Relationship="Self.FK__Zauvka__sotrudni__4D94879B" FromRole="Sotrudniki" ToRole="Zauvka" />
+        </EntityType>
+        <EntityType Name="StatusOborudovania">
+          <Key>
+            <PropertyRef Name="statusOborudovaniaId" />
+          </Key>
+          <Property Name="statusOborudovaniaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Oborudovanie" Relationship="Self.FK__Oborudova__statu__4AB81AF0" FromRole="StatusOborudovania" ToRole="Oborudovanie" />
+        </EntityType>
+        <EntityType Name="StatusZauvka">
+          <Key>
+            <PropertyRef Name="statusZauvkaId" />
+          </Key>
+          <Property Name="statusZauvkaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Zauvka" Relationship="Self.FK__Zauvka__statusZa__5070F446" FromRole="StatusZauvka" ToRole="Zauvka" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipEquipment">
+          <Key>
+            <PropertyRef Name="tipEquipmentId" />
+          </Key>
+          <Property Name="tipEquipmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="opisania" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Oborudovanie" Relationship="Self.FK__Oborudova__tipEq__48CFD27E" FromRole="TipEquipment" ToRole="Oborudovanie" />
+        </EntityType>
+        <EntityType Name="Zauvka">
+          <Key>
+            <PropertyRef Name="zauvkaId" />
+          </Key>
+          <Property Name="zauvkaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sotrudnikiId" Type="Int32" />
+          <Property Name="oborudovanieId" Type="Int32" />
+          <Property Name="mestoYstanovkiId" Type="Int32" />
+          <Property Name="data" Type="DateTime" Precision="0" />
+          <Property Name="statusZauvkaId" Type="Int32" />
+          <NavigationProperty Name="MestoYstanovki" Relationship="Self.FK__Zauvka__mestoYst__4F7CD00D" FromRole="Zauvka" ToRole="MestoYstanovki" />
+          <NavigationProperty Name="Oborudovanie" Relationship="Self.FK__Zauvka__oborudov__4E88ABD4" FromRole="Zauvka" ToRole="Oborudovanie" />
+          <NavigationProperty Name="Sotrudniki" Relationship="Self.FK__Zauvka__sotrudni__4D94879B" FromRole="Zauvka" ToRole="Sotrudniki" />
+          <NavigationProperty Name="StatusZauvka" Relationship="Self.FK__Zauvka__statusZa__5070F446" FromRole="Zauvka" ToRole="StatusZauvka" />
+        </EntityType>
+        <Association Name="FK__Oborudova__mesto__49C3F6B7">
+          <End Role="MestoYstanovki" Type="Self.MestoYstanovki" Multiplicity="0..1" />
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MestoYstanovki">
+              <PropertyRef Name="mestoYstanovkiId" />
+            </Principal>
+            <Dependent Role="Oborudovanie">
+              <PropertyRef Name="mestoYstanovkiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zauvka__mestoYst__4F7CD00D">
+          <End Role="MestoYstanovki" Type="Self.MestoYstanovki" Multiplicity="0..1" />
+          <End Role="Zauvka" Type="Self.Zauvka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MestoYstanovki">
+              <PropertyRef Name="mestoYstanovkiId" />
+            </Principal>
+            <Dependent Role="Zauvka">
+              <PropertyRef Name="mestoYstanovkiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oborudova__proiz__47DBAE45">
+          <End Role="Proizvoditel" Type="Self.Proizvoditel" Multiplicity="0..1" />
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvoditel">
+              <PropertyRef Name="proizvoditelId" />
+            </Principal>
+            <Dependent Role="Oborudovanie">
+              <PropertyRef Name="proizvoditelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oborudova__sotru__46E78A0C">
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="0..1" />
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudniki">
+              <PropertyRef Name="sotrudnikiId" />
+            </Principal>
+            <Dependent Role="Oborudovanie">
+              <PropertyRef Name="sotrudnikiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oborudova__statu__4AB81AF0">
+          <End Role="StatusOborudovania" Type="Self.StatusOborudovania" Multiplicity="0..1" />
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOborudovania">
+              <PropertyRef Name="statusOborudovaniaId" />
+            </Principal>
+            <Dependent Role="Oborudovanie">
+              <PropertyRef Name="statusOborudovaniaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oborudova__tipEq__48CFD27E">
+          <End Role="TipEquipment" Type="Self.TipEquipment" Multiplicity="0..1" />
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipEquipment">
+              <PropertyRef Name="tipEquipmentId" />
+            </Principal>
+            <Dependent Role="Oborudovanie">
+              <PropertyRef Name="tipEquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zauvka__oborudov__4E88ABD4">
+          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="0..1" />
+          <End Role="Zauvka" Type="Self.Zauvka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oborudovanie">
+              <PropertyRef Name="oborudovanieId" />
+            </Principal>
+            <Dependent Role="Zauvka">
+              <PropertyRef Name="oborudovanieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zauvka__sotrudni__4D94879B">
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="0..1" />
+          <End Role="Zauvka" Type="Self.Zauvka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudniki">
+              <PropertyRef Name="sotrudnikiId" />
+            </Principal>
+            <Dependent Role="Zauvka">
+              <PropertyRef Name="sotrudnikiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zauvka__statusZa__5070F446">
+          <End Role="StatusZauvka" Type="Self.StatusZauvka" Multiplicity="0..1" />
+          <End Role="Zauvka" Type="Self.Zauvka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusZauvka">
+              <PropertyRef Name="statusZauvkaId" />
+            </Principal>
+            <Dependent Role="Zauvka">
+              <PropertyRef Name="statusZauvkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Inventarizauia3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MestoYstanovki" EntityType="Self.MestoYstanovki" />
+          <EntitySet Name="Oborudovanie" EntityType="Self.Oborudovanie" />
+          <EntitySet Name="Proizvoditel" EntityType="Self.Proizvoditel" />
+          <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" />
+          <EntitySet Name="StatusOborudovania" EntityType="Self.StatusOborudovania" />
+          <EntitySet Name="StatusZauvka" EntityType="Self.StatusZauvka" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipEquipment" EntityType="Self.TipEquipment" />
+          <EntitySet Name="Zauvka" EntityType="Self.Zauvka" />
+          <AssociationSet Name="FK__Oborudova__mesto__49C3F6B7" Association="Self.FK__Oborudova__mesto__49C3F6B7">
+            <End Role="MestoYstanovki" EntitySet="MestoYstanovki" />
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zauvka__mestoYst__4F7CD00D" Association="Self.FK__Zauvka__mestoYst__4F7CD00D">
+            <End Role="MestoYstanovki" EntitySet="MestoYstanovki" />
+            <End Role="Zauvka" EntitySet="Zauvka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oborudova__proiz__47DBAE45" Association="Self.FK__Oborudova__proiz__47DBAE45">
+            <End Role="Proizvoditel" EntitySet="Proizvoditel" />
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oborudova__sotru__46E78A0C" Association="Self.FK__Oborudova__sotru__46E78A0C">
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oborudova__statu__4AB81AF0" Association="Self.FK__Oborudova__statu__4AB81AF0">
+            <End Role="StatusOborudovania" EntitySet="StatusOborudovania" />
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oborudova__tipEq__48CFD27E" Association="Self.FK__Oborudova__tipEq__48CFD27E">
+            <End Role="TipEquipment" EntitySet="TipEquipment" />
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zauvka__oborudov__4E88ABD4" Association="Self.FK__Zauvka__oborudov__4E88ABD4">
+            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+            <End Role="Zauvka" EntitySet="Zauvka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zauvka__sotrudni__4D94879B" Association="Self.FK__Zauvka__sotrudni__4D94879B">
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+            <End Role="Zauvka" EntitySet="Zauvka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zauvka__statusZa__5070F446" Association="Self.FK__Zauvka__statusZa__5070F446">
+            <End Role="StatusZauvka" EntitySet="StatusZauvka" />
+            <End Role="Zauvka" EntitySet="Zauvka" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Inventarizauia3ModelContainer" CdmEntityContainer="Inventarizauia3Entities">
+          <EntitySetMapping Name="MestoYstanovki">
+            <EntityTypeMapping TypeName="Inventarizauia3Model.MestoYstanovki">
+              <MappingFragment StoreEntitySet="MestoYstanovki">
+                <ScalarProperty Name="mestoYstanovkiId" ColumnName="mestoYstanovkiId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="opisania" ColumnName="opisania" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Oborudovanie">
+            <EntityTypeMapping TypeName="Inventarizauia3Model.Oborudovanie">
+              <MappingFragment StoreEntitySet="Oborudovanie">
+                <ScalarProperty Name="oborudovanieId" ColumnName="oborudovanieId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="dataPokypki" ColumnName="dataPokypki" />
+                <ScalarProperty Name="sotrudnikiId" ColumnName="sotrudnikiId" />
+                <ScalarProperty Name="proizvoditelId" ColumnName="proizvoditelId" />
+                <ScalarProperty Name="tipEquipmentId" ColumnName="tipEquipmentId" />
+                <ScalarProperty Name="mestoYstanovkiId" ColumnName="mestoYstanovkiId" />
+                <ScalarProperty Name="statusOborudovaniaId" ColumnName="statusOborudovaniaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proizvoditel">
+            <EntityTypeMapping TypeName="Inventarizauia3Model.Proizvoditel">
+              <MappingFragment StoreEntitySet="Proizvoditel">
+                <ScalarProperty Name="proizvoditelId" ColumnName="proizvoditelId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sotrudniki">
+            <EntityTypeMapping TypeName="Inventarizauia3Model.Sotrudniki">
+              <MappingFragment StoreEntitySet="Sotrudniki">
+                <ScalarProperty Name="sotrudnikiId" ColumnName="sotrudnikiId" />
+                <ScalarProperty Name="fio" ColumnName="fio" />
+                <ScalarProperty Name="post" ColumnName="post" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="parol" ColumnName="parol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusOborudovania">
+            <EntityTypeMapping TypeName="Inventarizauia3Model.StatusOborudovania">
+              <MappingFragment StoreEntitySet="StatusOborudovania">
+                <ScalarProperty Name="statusOborudovaniaId" ColumnName="statusOborudovaniaId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusZauvka">
+            <EntityTypeMapping TypeName="Inventarizauia3Model.StatusZauvka">
+              <MappingFragment StoreEntitySet="StatusZauvka">
+                <ScalarProperty Name="statusZauvkaId" ColumnName="statusZauvkaId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Inventarizauia3Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipEquipment">
+            <EntityTypeMapping TypeName="Inventarizauia3Model.TipEquipment">
+              <MappingFragment StoreEntitySet="TipEquipment">
+                <ScalarProperty Name="tipEquipmentId" ColumnName="tipEquipmentId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="opisania" ColumnName="opisania" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zauvka">
+            <EntityTypeMapping TypeName="Inventarizauia3Model.Zauvka">
+              <MappingFragment StoreEntitySet="Zauvka">
+                <ScalarProperty Name="zauvkaId" ColumnName="zauvkaId" />
+                <ScalarProperty Name="sotrudnikiId" ColumnName="sotrudnikiId" />
+                <ScalarProperty Name="oborudovanieId" ColumnName="oborudovanieId" />
+                <ScalarProperty Name="mestoYstanovkiId" ColumnName="mestoYstanovkiId" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="statusZauvkaId" ColumnName="statusZauvkaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

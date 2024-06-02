@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f57ef122af41468fba47f217e16216ec" Name="Diagram1">
+        <EntityTypeShape EntityType="Inventarizauia3Model.MestoYstanovki" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventarizauia3Model.Oborudovanie" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventarizauia3Model.Proizvoditel" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventarizauia3Model.Sotrudniki" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventarizauia3Model.StatusOborudovania" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventarizauia3Model.StatusZauvka" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventarizauia3Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventarizauia3Model.TipEquipment" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventarizauia3Model.Zauvka" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="Inventarizauia3Model.FK__Oborudova__mesto__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventarizauia3Model.FK__Zauvka__mestoYst__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventarizauia3Model.FK__Oborudova__proiz__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventarizauia3Model.FK__Oborudova__sotru__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventarizauia3Model.FK__Oborudova__statu__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventarizauia3Model.FK__Oborudova__tipEq__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventarizauia3Model.FK__Zauvka__oborudov__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventarizauia3Model.FK__Zauvka__sotrudni__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventarizauia3Model.FK__Zauvka__statusZa__5070F446" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
